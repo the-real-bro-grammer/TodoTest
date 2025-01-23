@@ -1,0 +1,22 @@
+{
+    "name": "todo-test",
+    "version": "0.0.1",
+    "description": "Todo Test",
+    "scripts": {
+        "dev": "next",
+        "build": "next build",
+        "start": "next start -p $PORT"
+    },
+    "devDependencies": {
+        "@types/node": "22.3.0",
+        "@types/react": "18.3.3",
+        "typescript": "^5.5.4"
+    },
+    "dependencies": {
+        "express": "^4.19.2",
+        "knex": "^3.1.0",
+        "next": "^14.2.5",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
+    }
+}
