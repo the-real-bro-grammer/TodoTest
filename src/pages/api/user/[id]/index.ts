@@ -22,6 +22,35 @@ async function get(req: NextApiRequest, res: NextApiResponse) {
     }
 }
 
-async function put(req: NextApiRequest, res: NextApiResponse) {}
+async function put(req: NextApiRequest, res: NextApiResponse) {
+    try {
+        const { id } = req.query;
+        const { body } = req;
 
-async function del(req: NextApiRequest, res: NextApiResponse) {}
+        const idValue = id[0];
+
+        const user = await defaultUserDb.update(parseInt(idValue), body);
+
+        console.log(`Update user ${user}`);
+
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+async function del(req: NextApiRequest, res: NextApiResponse) {
+    try {
+        const { id } = req.query;
+
+        const idValue = id[0];
+
+        const user = await defaultUserDb.delete(parseInt(idValue));
+
+        console.log(`Delete user ${user}`);
+
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
