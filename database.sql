@@ -3,7 +3,7 @@ DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'users') THEN
         CREATE TABLE Users (
-            Id SERIAL PRIMARY KEY,
+            Id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
             Email VARCHAR(255) NOT NULL UNIQUE,
             PasswordHash TEXT NOT NULL,
             PasswordSalt TEXT NOT NULL
@@ -16,7 +16,7 @@ DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'organization') THEN
         CREATE TABLE Organization (
-            Id SERIAL PRIMARY KEY,
+            Id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
             Title VARCHAR(255) NOT NULL,
             OwnerId INT NOT NULL,
             CONSTRAINT FK_Organization_User FOREIGN KEY (OwnerId) REFERENCES Users(Id)
@@ -43,7 +43,7 @@ DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'project') THEN
         CREATE TABLE Project (
-            Id SERIAL PRIMARY KEY,
+            Id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
             Title VARCHAR(255) NOT NULL,
             OrganizationId INT NOT NULL,
             ProjectOwnerId INT NOT NULL,
@@ -58,7 +58,7 @@ DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'task') THEN
         CREATE TABLE Task (
-            Id SERIAL PRIMARY KEY,
+            Id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
             Title VARCHAR(255) NOT NULL,
             Description TEXT,
             CreatorId INT NOT NULL,
@@ -78,7 +78,7 @@ DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'task_comments') THEN
         CREATE TABLE TaskComments (
-            Id SERIAL PRIMARY KEY,
+            Id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
             Comments TEXT NOT NULL,
             AuthorId INT NOT NULL,
             CreationDate TIMESTAMP DEFAULT NOW(),

@@ -19,7 +19,7 @@ export abstract class DbConnect<TData> implements IHasCrud<TData> {
     public async create(data: TData): Promise<boolean> {
         try {
             const results = await this.connect.connector()(this.tableName).insert(data);
-            return results.length > 0;
+            return results != null;
         } catch (error) {
             console.error(`Error creating entry in table ${this.tableName}:`, error);
             return false;
