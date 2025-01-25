@@ -2,7 +2,7 @@ import knex, { Knex } from 'knex';
 import defaultConfig from '../../../data/default_knex_config';
 
 export class KnexConnect {
-    private connect: Knex;
+    connect: Knex;
 
     constructor(config: Knex.Config) {
         this.connect = knex(config);

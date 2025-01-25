@@ -18,7 +18,8 @@ export abstract class DbConnect<TData> implements IHasCrud<TData> {
      */
     public async create(data: TData): Promise<boolean> {
         try {
-            const results = await this.connect.connector()(this.tableName).insert(data);
+            const query = this.connect.connector().from(this.tableName);
+            const results = await query.insert(data);
             return results != null;
         } catch (error) {
             console.error(`Error creating entry in table ${this.tableName}:`, error);
@@ -33,7 +34,8 @@ export abstract class DbConnect<TData> implements IHasCrud<TData> {
      */
     public async read(id: number): Promise<TData | null> {
         try {
-            const results = await this.connect.connector()(this.tableName).where({ id });
+            const query = this.connect.connector().from(this.tableName);
+            const results = await query.where({ id });
             return results.length > 0 ? results[0] : null;
         } catch (error) {
             console.error(`Error reading entry in table ${this.tableName} with ID ${id}:`, error);
@@ -49,10 +51,9 @@ export abstract class DbConnect<TData> implements IHasCrud<TData> {
      */
     public async update(id: number, data: TData): Promise<boolean> {
         try {
-            const results = await this.connect
-                .connector()(this.tableName)
-                .where({ id })
-                .update(data);
+            let query = this.connect.connector().from(this.tableName);
+            query = query.where({ id });
+            const results = await query.update(data);
             return results > 0;
         } catch (error) {
             console.error(`Error updating entry in table ${this.tableName} with ID ${id}:`, error);
@@ -67,7 +68,9 @@ export abstract class DbConnect<TData> implements IHasCrud<TData> {
      */
     public async delete(id: number): Promise<boolean> {
         try {
-            const results = await this.connect.connector()(this.tableName).where({ id }).del();
+            let query = this.connect.connector().from(this.tableName);
+            query = query.where({ id });
+            const results = await query.del();
             return results > 0;
         } catch (error) {
             console.error(`Error deleting entry in table ${this.tableName} with ID ${id}:`, error);
