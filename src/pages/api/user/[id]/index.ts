@@ -29,11 +29,11 @@ async function put(req: NextApiRequest, res: NextApiResponse) {
 
         const idValue = id[0];
 
-        const user = await defaultUserDb.update(parseInt(idValue), body);
+        const success = await defaultUserDb.update(parseInt(idValue), body);
 
-        console.log(`Update user ${user}`);
+        console.log(`Update user ${JSON.stringify(body)} ${success}`);
 
-        res.status(200).json(user);
+        res.status(200).json({ success });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -45,11 +45,11 @@ async function del(req: NextApiRequest, res: NextApiResponse) {
 
         const idValue = id[0];
 
-        const user = await defaultUserDb.delete(parseInt(idValue));
+        const success = await defaultUserDb.delete(parseInt(idValue));
 
-        console.log(`Delete user ${user}`);
+        console.log(`Delete user ${id}`);
 
-        res.status(200).json(user);
+        res.status(200).json({ success });
     } catch (error) {
         res.status(500).json(error);
     }
