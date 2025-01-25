@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { defaultUserDb } from '../../../lib/data/user';
+import { defaultOrganizationDb } from '../../../lib/data/organization';
 import { handleRequest } from '../../../lib/helpers/request_helpers';
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
@@ -10,9 +10,9 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
     try {
         const { body } = req;
 
-        const result = await defaultUserDb.create(body);
+        const result = await defaultOrganizationDb.create(body);
 
-        console.log(`Create user ${JSON.stringify(body)}`);
+        console.log(`Create organization ${JSON.stringify(body)}`);
 
         res.status(200).json({ success: result });
     } catch (error) {
