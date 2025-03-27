@@ -15,6 +15,7 @@ repository uses **Next.js** as the framework, **Knex.js** for database interacti
 -   **Organization Management:** Manage organizations and associate users.
 -   **Task Management:** Assign tasks to users, projects, and organizations.
 -   **API-Driven Architecture:** RESTful endpoints for easy integration.
+-   **[Technical Documentation](https://regular-hedge-57f.notion.site/Group-ToDo-18a673297fc7803c9364fbfeda2d58a1)** Is listed here
 
 ---
 
